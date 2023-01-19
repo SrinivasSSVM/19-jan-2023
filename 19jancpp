@@ -1,0 +1,172 @@
+1). Write a c++ program using + & - operator with class complex using operator overloading
+#include <iostream>
+using namespace std;
+
+class Complex
+{
+    protected:
+        double real, imaginary;
+    public:
+        Complex(double r = 0, double i = 0)
+        {
+            real = r;
+            imaginary = i;
+        }
+        Complex operator+(Complex const &obj)
+        {
+            Complex result;
+            result.real = real + obj.real;
+            result.imaginary = imaginary + obj.imaginary;
+            return result;
+        }
+        Complex operator-(Complex const &obj)
+        {
+            Complex result;
+            result.real = real - obj.real;
+            result.imaginary = imaginary - obj.imaginary;
+            return result;
+        }
+        void print()
+        {
+            cout << real << " + " << imaginary << "i" << endl;
+        }
+};
+
+int main()
+{
+    Complex c1(5,3), c2(2, 7);
+    Complex c3 = c1 + c2;
+    Complex c4 = c1 - c2;
+    cout << "c1 + c2 = ";
+    c3.print();
+    cout << "c1 - c2 = ";
+    c4.print();
+    return 0;
+}
+
+2). overload the "==" operator for a class "Employee" that represents a employee. The
+class should have private member variables "id" and "name" that represent the employee's
+ID and Name.
+
+#include<iostream>
+using namespace std;
+
+class Employee
+{
+private:
+    int id;
+    string name;
+	public:
+    	Employee(int id, string name) : id(id), name(name) {}
+    bool operator==(const Employee &e) const
+	{
+        return id == e.id && name == e.name;
+    }
+};
+
+int main()
+{
+	Employee e1,e2;
+	e1.getvalue (1, "srinivas");
+	e2.getvalue (2, "ravi";)
+	if (e1==e2)
+	cout<<"They are equal"<<endl;
+	else
+	cout<<"they are not equal"
+	return 0;
+}
+
+3). Write a c++ program that demonstrates the use of virtual functions in a class hierarchy with multiple levels of inheritance
+#include <iostream>
+using namespace std;
+
+class Shape {
+protected:
+    int width, height;
+public:
+    Shape(int w = 0, int h = 0) : width(w), height(h) {}
+    virtual int area() = 0;
+};
+
+class Rectangle : public Shape {
+public:
+    Rectangle(int w = 0, int h = 0) : Shape(w, h) {}
+    int area() {
+        return width * height;
+    }
+};
+
+class Triangle : public Shape {
+public:
+    Triangle(int w = 0, int h = 0) : Shape(w, h) {}
+    int area() {
+        return (width * height) / 2;
+    }
+};
+
+int main() {
+    Shape *shape;
+    Rectangle rec(10, 5);
+    Triangle tri(10, 5);
+
+    shape = &rec;
+    cout << "Rectangle area: " << shape->area() << endl;
+
+    shape = &tri;
+    cout << "Triangle area: " << shape->area() << endl;
+
+    return 0;
+}
+
+destructors called
+
+#include <iostream>
+using namespace std;
+
+class Shape {
+protected:
+    int width, height;
+public:
+    Shape(int w = 0, int h = 0) : width(w), height(h) {}
+    virtual int area() = 0;
+    virtual ~Shape() {
+        cout<<"Shape destructor called"<<endl;
+    }
+};
+
+class Rectangle : public Shape {
+public:
+    Rectangle(int w = 0, int h = 0) : Shape(w, h) {}
+    int area() {
+        return width * height;
+    }
+    ~Rectangle() {
+        cout<<"Rectangle destructor called"<<endl;
+    }
+};
+
+class Triangle : public Shape {
+public:
+    Triangle(int w = 0, int h = 0) : Shape(w, h) {}
+    int area() {
+        return (width * height) / 2;
+    }
+    ~Triangle() {
+        cout<<"Triangle destructor called"<<endl;
+    }
+};
+
+int main() {
+    Shape *shape;
+    shape = new Rectangle(10, 5);
+    cout << "Rectangle area: " << shape->area() << endl;
+    delete shape;
+
+    shape = new Triangle(10, 5);
+    cout << "Triangle area: " << shape->area() << endl;
+    delete shape;
+
+    return 0;
+}
+
+
